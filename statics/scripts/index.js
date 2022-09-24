@@ -6,24 +6,58 @@ const status = document.querySelector(".status")
 
 document.querySelectorAll(".square").forEach((element, i) => {
     element.addEventListener('click', markSquare)
+    element.addEventListener('mouseover', showPotentialMark)
+    element.addEventListener('mouseout', removePotentialMark)
     squares[i] = element
 })
 playAgainButton.addEventListener('click', playAgain)
 
 function markSquare(e) {
-    if (!gb.winner && e.target.textContent === "") {
+    const item = e.target.dataset.item
+    if (!gb.gameEnd && !gb.board[Math.floor(item / 3)][item % 3]) {
         const item = e.target.dataset.item
         e.target.textContent = gb.mark(Math.floor(item / 3), item % 3)
-        if (gb.tie) return status.textContent = `It's a tie`
-        if (gb.winner) status.textContent = `${gb.winner.name} won`
+        // e.target.style.backgroundColor = "#D44000"
+        if (gb.gameEnd) playAgainButton.style.display = "block"
+        if (gb.tie) {
+            status.style.color = "#D44000"
+            return status.textContent = `It's a tie!`
+        }
+        if (gb.winner) {
+            status.style.color = "#54BAB9"
+            status.textContent = `${gb.winner.name} won!`
+        }
         else status.textContent = `${gb.currentPlayer.name}'s Turn`
+        e.target.classList.remove("square-hover")
     }
+}
+
+function showPotentialMark(e) {
+    const item = e.target.dataset.item
+    if (!gb.gameEnd && !gb.board[Math.floor(item / 3)][item % 3]) {
+        e.target.style.backgroundColor = "#54BAB9"
+        e.target.textContent = gb.currentPlayer.marker;
+        e.target.classList.add("square-hover")
+    } else {
+        e.target.style.backgroundColor = "#D44000"
+    }
+}
+
+function removePotentialMark(e) {
+    const item = e.target.dataset.item
+    if (!gb.gameEnd && !gb.board[Math.floor(item / 3)][item % 3]) {
+        e.target.textContent = "";
+    }
+    e.target.classList.remove("square-hover")
+    e.target.style.backgroundColor = "#F8EDE3"
 }
 
 function playAgain() {
     gb.clearBoard()
     squares.forEach(e => e.textContent = "")
     status.textContent = `${gb.currentPlayer.name}'s Turn`
+    status.style.color = "#6C4A4A"
+    playAgainButton.style.display = "none"
 }
 
 // creating players

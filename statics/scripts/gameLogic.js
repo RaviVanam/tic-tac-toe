@@ -9,6 +9,7 @@ export class GameBoard {
         this.currentPlayer = this.player1
         this.filledSquares = 0
         this.tie = false
+        this.gameEnd = false
         this.winner = null
         this.board = Array(3)
         for (let row = 0; row < this.board.length; row++) {
@@ -22,6 +23,7 @@ export class GameBoard {
         this.currentPlayer = (this.currentPlayer === this.player1) ? this.player2 : this.player1
         this.filledSquares += 1
         this.calculateWinner()
+        if (this.winner) this.gameEnd = true;
         return this.board[row][col]
     }
 
@@ -47,7 +49,10 @@ export class GameBoard {
             return this.winner;
         }
 
-        if (this.filledSquares === 9) this.tie = true;
+        if (this.filledSquares === 9) {
+            this.tie = true;
+            this.gameEnd = true;
+        }
         return null;
     }
 
