@@ -25,7 +25,7 @@ function markSquare(e) {
         }
         if (gb.winner) {
             status.style.color = "#54BAB9"
-            status.textContent = `${gb.winner.name} won!`
+            status.textContent = `${gb.winner.name} has won!`
         }
         else status.textContent = `${gb.currentPlayer.name}'s Turn`
         e.target.classList.remove("square-hover")
