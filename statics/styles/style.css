@@ -1,0 +1,34 @@
+* {
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+
+.gameboard {
+    aspect-ratio: 1/1;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    width: 90%;
+    margin: 20px;
+    background-color: #F8EDE3;
+}
+
+.square {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 60px;
+    border: 2px solid #7D6E83;
+}
+
+.square:hover {
+    background-color: #DFD3C3;
+}
+
+/* utilities */
+
+.center {
+    margin-left: auto;
+    margin-right: auto;
+}
