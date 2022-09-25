@@ -24,7 +24,7 @@ function markSquare(e) {
             return status.textContent = `It's a tie!`
         }
         if (gb.winner) {
-            status.style.color = "#54BAB9"
+            status.style.color = "#367E18"
             status.textContent = `${gb.winner.name} has won!`
         }
         else status.textContent = `${gb.currentPlayer.name}'s Turn`
